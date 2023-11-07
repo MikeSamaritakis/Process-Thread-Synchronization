@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/userbane1/Desktop/345/assign2/Process-Thread-Synchronization",
-      "program": "c:/Users/userbane1/Desktop/345/assign2/Process-Thread-Synchronization/build/Debug/outDebug",
+      "cwd": "c:/Users/samao/Desktop/345/assign2/Process-Thread-Synchronization",
+      "program": "c:/Users/samao/Desktop/345/assign2/Process-Thread-Synchronization/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
