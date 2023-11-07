@@ -1,0 +1,20 @@
+kanw ena thread gia kathe stoixeio me != -1 (=id) mesa se ena loop
+
+meta mesa se kathe thread yparxei ena while(oso einai mesa sto street){
+proxwra mprosta ena vhma, alliws lock kai perimene kai print_all()
+ksanaksekina thn while
+}
+
+auth h while tha einai mesa se mia while me check gia str kai sdl oso 
+exoun id!=-1 na trexoun.
+
+seira vhmatwn: segragate colors-
+segragate directions-
+pernane osa emeinan-
+backtostreet osa emeinan me to domcolor-
+pernane oso gyrisan-
+backtostreet osa emeinan kai segragate directions-
+pernane osa emeinan ston dromo-
+backtostreet ta ypoloipa -
+pernane to dromo-
+return;-
