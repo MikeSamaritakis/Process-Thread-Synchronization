@@ -1,0 +1,13 @@
+Visual Output Plan:
+
+A new Study Room and Waiting Room must be printed everytime 
+any status change event happens concerning any student.
+
+Each print must contain both Study Room and Waiting Room.
+
+Possible data structures to use for rooms: Two arrays of [40] 
+indexes for the maximum amount of students.
+
+Each array must be initialized globally with 40 empty (NOT NULL)
+indexes.
+
