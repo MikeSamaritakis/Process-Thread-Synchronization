@@ -54,6 +54,9 @@ int main(int argc, char *argv[]){
 
     num_students = atoi(argv[1]); /* Arguement given by user for the amount of students. */
 
+    /* Allocate space for the amount of threads specified by user through input. */
+    students = (pthread_t *)malloc(num_students * sizeof(pthread_t)); 
+
     
 
     return 0;
