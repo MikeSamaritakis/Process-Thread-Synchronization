@@ -8,6 +8,6 @@ Each print must contain both Study Room and Waiting Room.
 Possible data structures to use for rooms: Two arrays of [40] 
 indexes for the maximum amount of students.
 
-Each array must be initialized globally with 40 empty (NOT NULL)
-indexes.
+Each array must be initialized globally with 
+40 empty (NOT NULL) indexes.
 

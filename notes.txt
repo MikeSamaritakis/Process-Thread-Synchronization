@@ -1,3 +1,5 @@
+PERSINH ASKHSH:
+
 kanw ena thread gia kathe stoixeio me != -1 (=id) mesa se ena loop
 
 meta mesa se kathe thread yparxei ena while(oso einai mesa sto street){
