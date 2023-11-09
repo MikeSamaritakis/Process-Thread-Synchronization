@@ -21,14 +21,14 @@ int num_students;
 int waiting_students[40]; // Array to track students in the waiting room
 int studying_students[8]; // Array to track students in the study room
 
-void printRoad() {
+void printRoooms() {
     //system("clear"); // Clear the console for updated display
     printf("Study Room:");
     for (int i = 0; i < 8; i++) {
-        if (studying_students[i] == 0){
+        if (studying_students[i] == -1){
             printf(" ");
         }else{
-            printf("|| ");
+            printf("| ");
         }
         if (studying_students[i] != -1) {
             printf("%02d ", studying_students[i] + 1);
@@ -40,10 +40,10 @@ void printRoad() {
 
     printf("Waiting Room:");
     for (int i = 0; i < num_students; i++) {
-        if (waiting_students[i] == 0){
+        if (waiting_students[i] == -1){
             printf(" ");
         }else{
-            printf("|| ");
+            printf("| ");
         }
         if (waiting_students[i] != -1) {
             printf("%02d ", waiting_students[i] + 1);
@@ -83,7 +83,7 @@ void *student_thread(void *arg) {
     removeStudentFromArray(id, waiting_students, num_students);
     studying_students[id - 1] = id;
 
-    printRoad(); // Print the road after entering the study room
+    printRoooms(); // Print the road after entering the study room
 
     sleep(study_time);
 
@@ -91,19 +91,14 @@ void *student_thread(void *arg) {
     sem_post(&study_room);
     removeStudentFromArray(id, studying_students, 8);
 
-    printRoad(); // Print the road after exiting the study room
+    printRoooms(); // Print the road after exiting the study room
 
     return NULL;
 }
 
-void printRooms(){
-    
-    return;
-}
-
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        perror("Usage: ./your_program <num_students>\n");
+        perror("Try typing: './4529 <number>' where 20 <= number <= 40 .\n");
         return -1;
     }
 

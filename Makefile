@@ -13,6 +13,10 @@
 all: 4529.c
 	gcc -Wall -pthread -o 4529 4529.c
     
+# This is for anothertest.c (2023)
+test: anothertest.c
+	gcc -Wall -pthread -o anothertest anothertest.c
+
 clean:
 	rm -rf 4529_2022 4529
 
