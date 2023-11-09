@@ -18,6 +18,6 @@ test: anothertest.c
 	gcc -Wall -pthread -o anothertest anothertest.c
 
 clean:
-	rm -rf 4529_2022 4529
+	rm -rf 4529_2022 4529 anothertest
 
 
