@@ -18,3 +18,25 @@ pernane osa emeinan ston dromo-
 backtostreet ta ypoloipa -
 pernane to dromo-
 return;-
+
+
+FETINH ASKHSH: 
+
+Semaphores study_room and waiting_room are declared
+to control access to the study room and waiting room respectively.
+
+An array of pthreads students is declared to hold the threads that 
+represent the students. Arrays waiting_students and studying_students 
+are used to track the students in the waiting room and study room respectively.
+
+The student_thread function is the thread function that simulates a student's 
+behavior. Each student waits to enter the waiting room, then waits to enter 
+the study room. Once in the study room, the student studies for a random time 
+between 5 to 15 seconds, then leaves the study room.
+
+In the main function, the program checks if the correct number of arguments has been passed. 
+If not, it prints an error message and exits.
+ It then initializes the semaphores and creates the student threads. 
+ Each student thread is passed a unique student id. 
+ After all the student threads have been created, the main thread waits for all of them to finish. 
+ Finally, it destroys the semaphores and frees the memory allocated for the student threads.
