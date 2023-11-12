@@ -13,6 +13,9 @@
 all: 4529.c
 	gcc -Wall -pthread -o 4529 4529.c
     
+sia: assignment2-sia.c
+	gcc -Wall -pthread -o sia assignment2-sia.c
+
 clean:
 	rm -rf 4529_2022 4529 
 

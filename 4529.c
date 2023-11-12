@@ -19,31 +19,34 @@ pthread_t *students;
 
 int num_students;
 
-int waiting_students[40]; // Array to track students in the waiting room
-int studying_students[8]; // Array to track students in the study room
+int waiting_students[40]; // Array to track students in the waiting room.
+int studying_students[8]; // Array to track students in the study room.
 
-void removeStudentFromArray(int student_id, int array[], int size) {
+void removeStudentFromArray(int am, int array[], int size) {
     for (int i = 0; i < size; i++) {
-        if (array[i] == student_id) {
-            array[i] = -1; // Mark the slot as empty
+        if (array[i] == am) {
+            array[i] = -1; // Mark the slot as empty by having -1 as the value.
             break;
         }
     }
 }
 
 void printRoooms() {
+
+    sem_wait(&study_room);
+    sem_wait(&waiting_room);
     //system("clear"); // Clear the console for updated display
     printf("Study Room:");
     for (int i = 0; i < 8; i++) {
         if (studying_students[i] == -1){
-            printf(" ");
+            //printf(" ");
         }else{
             printf("| ");
         }
         if (studying_students[i] != -1) {
             printf("%02d ", studying_students[i] + 1);
         } else {
-            printf("    ");
+            //printf("  ");
         }
     }
     printf("|\n");
@@ -51,69 +54,76 @@ void printRoooms() {
     printf("Waiting Room:");
     for (int i = 0; i < num_students; i++) {
         if (waiting_students[i] == -1){
-            printf(" ");
+            //printf(" ");
         }else{
             printf("| ");
         }
         if (waiting_students[i] != -1) {
             printf("%02d ", waiting_students[i] + 1);
         } else {
-            printf("    ");
+            //printf("  ");
         }
     }
     printf("|\n");
     printf("\n");
     fflush(stdout);
+
+    sem_post(&study_room);
+    sem_post(&waiting_room);
+
+    return;
 }
 
 void *student_thread(void *arg) {
     int id = *(int *)arg;
-    int study_time = (rand() % (MAX_STUDY_TIME - 5 + 1)) + 5; // Random study time between 5 to 15 seconds
+    int study_time = (rand() % (MAX_STUDY_TIME - 5 + 1)) + 5; // Random study time between 5 to 15 seconds.
+    int name = rand() % 9000 + 1000;
 
-    printf("Student %d wants to enter the study room.\n", id);
+    //printf("Student %d wants to enter the study room.\n", id);
 
     sem_wait(&waiting_room);
 
-    printf("Student %d entered the waiting room.\n", id);
-    waiting_students[id - 1] = id;
+    ///printf("Student %d entered the waiting room.\n", id);
+    waiting_students[id - 1] = name;
     
     sem_wait(&study_room);
+    
     sem_post(&waiting_room);
 
-    printf("Student %d entered the study room.\n", id);
-    removeStudentFromArray(id, waiting_students, num_students);
-    studying_students[id - 1] = id;
+    //printf("Student %d entered the study room.\n", id);
+    removeStudentFromArray(name, waiting_students, num_students);
+    studying_students[id - 1] = name;
 
-    printRoooms(); // Print the road after entering the study room
+    printRoooms(); // Print the road after entering the study room.
 
     sleep(study_time);
 
-    printf("Student %d exited the study room after studying for %d seconds.\n", id, study_time);
+    printf("Student %d exited the study room after studying for %d seconds.\n", name+1, study_time);
     sem_post(&study_room);
-    removeStudentFromArray(id, studying_students, 8);
+    removeStudentFromArray(name, studying_students, 8);
 
-    printRoooms(); // Print the road after exiting the study room
+    printRoooms(); // Print the road after exiting the study room.
 
     return NULL;
 }
 
 
 
-int main(int argc, char *argv[]){
+int main(/*int argc, char *argv[]*/){
 
-    /* Arguement check for correct use. */
-    if (argc != 2) {
-        perror("Try typing: './4529 <number>' where 20 <= number <= 40 .\n");
-        return -1;
-    }
+    // /* Arguement check for correct use. */
+    // if (argc != 2) {
+    //     perror("Try typing: './4529 <number>' where 20 <= number <= 40 .\n");
+    //     return -1;
+    // }
 
-    num_students = atoi(argv[1]); /* Arguement given by user for the amount of students. */
+    // num_students = atoi(argv[1]); /* Arguement given by user for the amount of students. */
 
-    /* Arguement check for correct input number. */
-    if (num_students < 20 || num_students > 40) {
-        perror("Invalid number of students, please enter a number between 20 and 40.\n");
-        return -1;
-    }
+    // /* Arguement check for correct input number. */
+    // if (num_students < 20 || num_students > 40) {
+    //     perror("Invalid number of students, please enter a number between 20 and 40.\n");
+    //     return -1;
+    // }
 
     for(int i = 0; i < 40; i++){
         waiting_students[i] = -1;
@@ -121,7 +131,17 @@ int main(int argc, char *argv[]){
     }
 
     /* Arguement given by user for the amount of students. */
-    num_students = atoi(argv[1]); 
+    //num_students = atoi(argv[1]); 
+    int temp = -1;
+    printf("Enter a number between 20 and 40 for the amount of students:");
+    scanf("%d", &temp);
+    while (temp < 20 || temp > 40){
+        perror("Invalid number of students, please enter a number between 20 and 40.\n");
+        printf("Enter a number between 20 and 40 for the amount of students:");
+        scanf("%d", &temp);
+    }
+    
+    num_students = temp;
 
     /* Allocate space for the amount of threads specified by user through input. */
     students = (pthread_t *)malloc(num_students * sizeof(pthread_t)); 
@@ -135,7 +155,6 @@ int main(int argc, char *argv[]){
 
     /* An array student_ids is created to hold the IDs of the students. 
     * The IDs are simply integers from 1 to num_students. */
-    //!!MUST MAKE RANDOM 4 DIGIT NUMBERS THEIR IDS (AM i.e.: 4529)!!
     int student_ids[num_students];
 
     /* A for loop is used to initialize the waiting_students array and create the student
