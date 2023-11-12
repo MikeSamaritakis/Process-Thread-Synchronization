@@ -7,3 +7,4 @@ This C program simulates a study room scenario using threads and semaphores. It 
 
 I prefered the use of semaphores rather than mutexes for locking and unlocking purposes.
 
+As you can see in the Makefile I also included last year's assignment since it is working in better fashion than this year's assignment.
